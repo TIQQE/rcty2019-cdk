@@ -4,6 +4,7 @@ from aws_cdk import (
     aws_lambda as _lambda,
     aws_apigateway as _apigw
 )
+from rcty2019_cdk.hitcounter import HitCounter
 
 
 class Rcty2019CdkStack(core.Stack):
@@ -17,9 +18,10 @@ class Rcty2019CdkStack(core.Stack):
                                    handler='backend.handler',
                                    runtime=_lambda.Runtime.PYTHON_3_7,
                                    code=_lambda.Code.from_asset(functions_path))
+        hit_count_handler = HitCounter(self, 'HitCountHandler', downstream_function=backend).handler
         desc = 'A simple example REST API backed by lambda using CDK'
         api = _apigw.LambdaRestApi(self,
                                    'RestApi',
-                                   handler=backend,
+                                   handler=hit_count_handler,
                                    description=desc)
 
