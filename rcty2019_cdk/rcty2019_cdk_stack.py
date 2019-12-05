@@ -5,11 +5,11 @@ from aws_cdk import (
     aws_apigateway as _apigw
 )
 from rcty2019_cdk.hitcounter import HitCounter
-
+from cdk_watchful import Watchful
 
 class Rcty2019CdkStack(core.Stack):
 
-    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
+    def __init__(self, scope: core.Construct, id: str, *, alarm_email: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
         functions_path = os.path.join(os.path.dirname(__file__), '../lambda')
@@ -24,4 +24,6 @@ class Rcty2019CdkStack(core.Stack):
                                    'RestApi',
                                    handler=hit_count_handler,
                                    description=desc)
+        watch = Watchful(self, 'my-monitoring', alarm_email=alarm_email)
+        watch.watch_scope(self)
 
