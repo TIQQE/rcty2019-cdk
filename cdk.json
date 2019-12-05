@@ -1,6 +1,8 @@
 {
   "app": "python3 app.py",
   "context": {
-    "alarm_email": "erik.lundevall@tiqqe.com"
+    "alarm_email": "erik.lundevall@tiqqe.com",
+    "ping_url": "https://sz8k3om6f2.execute-api.eu-north-1.amazonaws.com/prod/",
+    "tps": 3
   }
 }
