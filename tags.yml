@@ -1,0 +1,10 @@
+All: &shared
+  Project: Re:Invent comes to you 2019
+
+Production:
+  <<: *shared
+  Owner: TIQQE
+
+Development:
+  <<: *shared
+  Owner: elz
